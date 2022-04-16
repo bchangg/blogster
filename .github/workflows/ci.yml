@@ -1,0 +1,59 @@
+name: blogster CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  rspec:
+    name: RSpec Tests
+    runs-on: ubuntu-20.04
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set Up Ruby and Install Gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Set Up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14.18.2
+
+      - name: Set Up Test Database
+        # https://www.postgresql.org/docs/9.3/libpq-envars.html
+        env:
+          RAILS_ENV: test
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGHOST: localhost
+        run: |
+          bundle exec rake db:create
+          bundle exec rake db:schema:load
+
+      - name: Run RSpec
+        env:
+          RAILS_ENV: test
+          PGUSER: postgres
+          PGPASSWORD: postgres
+          PGHOST: localhost
+        run: bundle exec rspec spec
+
+      - name: Upload Codecov Results
+        uses: codecov/codecov-action@v2.1.0
