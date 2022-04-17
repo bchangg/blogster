@@ -57,6 +57,7 @@ group :test do
   gem 'rspec-rails', '~>6.0.0.rc1'
   gem 'capybara'
   gem 'simplecov'
+  gem 'codecov'
 end
 
 group :development do
