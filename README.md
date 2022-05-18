@@ -1,4 +1,4 @@
-![RSpec CI Status](https://github.com/bchangg/blogster/actions/workflows/ci.yml/badge.svg?branch=main)
+![RSpec CI Status](https://github.com/bchangg/blogster/actions/workflows/ci.yml/badge.svg)
 
 # README
 
