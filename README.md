@@ -1,5 +1,6 @@
 ![RSpec CI Status](https://github.com/bchangg/blogster/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/bchangg/blogster/branch/main/graph/badge.svg?token=QLNQJTTEW6)](https://codecov.io/gh/bchangg/blogster)
+[![Maintainability](https://api.codeclimate.com/v1/badges/640dbf8be4b076e1096e/maintainability)](https://codeclimate.com/github/bchangg/blogster/maintainability)
 
 # README
 
