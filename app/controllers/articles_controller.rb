@@ -4,9 +4,11 @@ class ArticlesController < ApplicationController
   end
 
   def create
+    redirect_to articles_path
   end
 
   def new
+    @article = Article.new
   end
 
   def edit
