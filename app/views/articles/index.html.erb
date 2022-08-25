@@ -1,1 +1,23 @@
-<h1 class="text-3xl font-bold">Articles#index</h1>
+<section class="flex flex-col mx-14">
+  <h1 class="text-3xl font-bold">Articles#index</h1>
+
+  <br>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Body</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.title %></td>
+          <td><%= article.body %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
