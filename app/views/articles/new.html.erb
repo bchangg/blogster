@@ -2,8 +2,17 @@
   <h1 class="text-3xl font-bold">Articles#new</h1>
 
   <br>
+  
+  <%# TODO: move this form into a partial, pass in the model: @thing and render in that partial %>
 
   <%= form_with model: @article, class: 'flex flex-col' do |form| %>
+    <% if @article.errors.any? %>
+      <ul>
+        <% @article.errors.full_messages.each do |message| %>
+          <li class=""><%= message %></li>
+        <% end %>
+      </ul>
+    <% end %>
     <%= form.label :title, "Title: " %>
     <%= form.text_field :title %>
     <%= form.label :body, "Body: " %>

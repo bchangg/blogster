@@ -4,7 +4,13 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    redirect_to articles_path
+    @article = Article.new(article_params)
+
+    if @article.save
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def new
@@ -21,5 +27,10 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+  def article_params
+    params.require(:article).permit(:title, :body)
   end
 end
