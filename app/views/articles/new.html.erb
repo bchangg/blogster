@@ -1,10 +1,7 @@
-<section class="flex flex-col mx-14">
-  <h1 class="text-3xl font-bold">Articles#new</h1>
+<h1 class="text-3xl text-center font-bold">New Article</h1>
+<%# TODO: Remove this link, put in a nav bar %>
+<%= link_to 'View List', articles_path %>
 
-  <br>
+<br>
 
-  <%= link_to 'View List', articles_path %>
-  
-  <%= render 'form', model: @article %>
-
-</section>
+<%= render 'form', model: @article %>

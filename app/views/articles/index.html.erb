@@ -1,24 +1,22 @@
-<section class="flex flex-col mx-14">
-  <h1 class="text-3xl font-bold ">Home</h1>
+<h1 class="text-3xl text-center font-bold ">Home</h1>
+<%# TODO: Remove this link, put in a nav bar %>
+<%= link_to 'New Article', new_article_path %>
 
-  <%= link_to 'New Article', new_article_path %>
+<br>
 
-  <br>
-
-  <table>
-    <thead>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
       <tr>
-        <th>Title</th>
-        <th>Body</th>
+        <td><%= article.title %></td>
+        <td><%= article.body %></td>
       </tr>
-    </thead>
-    <tbody>
-      <% @articles.each do |article| %>
-        <tr>
-          <td><%= article.title %></td>
-          <td><%= article.body %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</section>
+    <% end %>
+  </tbody>
+</table>
