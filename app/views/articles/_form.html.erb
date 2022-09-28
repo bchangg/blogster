@@ -1,0 +1,14 @@
+<%= form_with model: model, class: 'flex flex-col' do |form| %>
+  <% if model.errors.any? %>
+    <ul>
+      <% model.errors.full_messages.each do |message| %>
+        <li class=""><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form.label :title, "Title: " %>
+  <%= form.text_field :title %>
+  <%= form.label :body, "Body: " %>
+  <%= form.text_area :body %>
+  <%= form.submit %>
+<% end %>
