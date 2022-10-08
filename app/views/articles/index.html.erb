@@ -2,11 +2,12 @@
 
 <br>
 
-<table>
+<table class="text-center">
   <thead>
     <tr>
       <th>Title</th>
       <th>Body</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -14,6 +15,7 @@
       <tr>
         <td><%= article.title %></td>
         <td><%= article.body %></td>
+        <td><%= button_to "Edit", edit_article_path(article) %><%= button_to "Delete", article_path(article), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } } %></td>
       </tr>
     <% end %>
   </tbody>
