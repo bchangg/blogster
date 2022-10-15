@@ -1,7 +1,15 @@
-# Description, Context, Motivation
+# Description, Motivation, and Context
 
-_Why is this change being made? What is the context that is needed for the reviewing person(s) to understand?_
+_What are you changing? Why is this change being made? etc._
 
-# Screenshots
+# Screenshots (if appropriate)
 
-_Provide screenshots if needed_
+_Frontend/UX changes should include screenshots or GIFs showing the change_
+
+# Replication Steps / How to test
+
+_Show how to replicate the issue or the steps to go through the functional changes_
+
+# Relevant Links (Stack Overflow, JIRA, RFC, etc)
+
+_Include links to anything that might provide more insight into why the change was made_
