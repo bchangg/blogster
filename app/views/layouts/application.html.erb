@@ -12,14 +12,14 @@
   </head>
 
   <body>
-    <%# TODO: Add a nav header here %>
-    <main class="container mx-auto mt-28 px-5 flex flex-col">
     <%# TODO: Handle removal of flash message after duration %>
-      <% flash.each do |type, message| %>
-        <div class="alert text-center">
-          <%= message %>
-        </div>
-      <% end %>
+    <% flash.each do |type, message| %>
+      <div class="alert text-center">
+        <%= message %>
+      </div>
+    <% end %>
+    <main class="container mx-auto px-5 flex flex-col">
+      <%= render 'layouts/nav' %>
       <%= yield %>
     </main>
   </body>
