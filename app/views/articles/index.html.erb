@@ -1,1 +1,22 @@
-<h1 class="text-3xl font-bold">Articles#index</h1>
+<h1 class="text-3xl text-center font-bold ">Home</h1>
+
+<br>
+
+<table class="text-center">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= link_to article.title, article_path(article), class: 'text-sky-400' %></td>
+        <td><%= article.body %></td>
+        <td><%= link_to "Edit", edit_article_path(article) %><%= button_to "Delete", article_path(article), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
