@@ -47,6 +47,9 @@ jobs:
           bundle exec rake db:create
           bundle exec rake db:schema:load
 
+      - name: Precompile Assets
+        run: bundle exec rails assets:precompile --trace
+
       - name: Run RSpec
         env:
           RAILS_ENV: test
