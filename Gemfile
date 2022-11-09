@@ -61,6 +61,7 @@ group :test do
   gem 'capybara'
   gem 'simplecov'
   gem 'codecov'
+  gem 'rails-controller-testing'
 end
 
 group :development do
