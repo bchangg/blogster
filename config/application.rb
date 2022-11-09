@@ -35,7 +35,7 @@ module Blogster
     config.generators.system_tests = nil
 
     config.generators do |g|
-      g.factory_bot suffix: "factory"
+      g.factory_bot suffix: "factory", dir: 'spec/factories'
     end
   end
 end
