@@ -136,17 +136,13 @@ RSpec.describe "Articles", type: :request do
 
       before(:each) { put article_path(article, article: valid_attributes) }
 
-      it 'returns 302 found status code' do
-        expect(response).to have_http_status(:found)
+      it 'redirects to the updated article' do
+        expect(response).to redirect_to(article_path(article))
       end
 
       it 'updates the article' do
         expect(article.reload.title).to eq(valid_attributes[:title])
         expect(article.reload.body).to eq(valid_attributes[:body])
-      end
-
-      it 'redirects to the updated article' do
-        expect(response).to redirect_to(article_path(article))
       end
     end
 
