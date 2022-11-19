@@ -13,10 +13,6 @@ RSpec.describe "Articles", type: :request do
     { title: nil, body: 'new body' }
   end
 
-  let(:nil_body_attributes) do
-    { title: 'new title', body: nil }
-  end
-
   describe "GET :index" do
     before(:each) do 
       get articles_path
@@ -165,10 +161,6 @@ RSpec.describe "Articles", type: :request do
 
       it 'does not update article' do
         put article_path(article, article: nil_title_attributes)
-        expect(article.reload.title).to eq(initial_attributes[:title])
-        expect(article.reload.body).to eq(initial_attributes[:body])
-
-        put article_path(article, article: nil_body_attributes)
         expect(article.reload.title).to eq(initial_attributes[:title])
         expect(article.reload.body).to eq(initial_attributes[:body])
       end
