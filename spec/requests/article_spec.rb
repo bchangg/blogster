@@ -105,6 +105,14 @@ RSpec.describe "Articles", type: :request do
         }.to raise_exception(ActiveRecord::RecordNotFound)
       end
     end
+
+    context 'with no id' do
+      it 'raise ActionController::UrlGenerationError error' do
+        expect {
+          get article_path()
+        }.to raise_exception(ActionController::UrlGenerationError)
+      end
+    end
   end
 
   describe "GET :edit" do
