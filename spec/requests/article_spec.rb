@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Articles", type: :request do
+RSpec.describe 'Articles', type: :request do
   let(:initial_attributes) do
     { title: 'test', body: 'test body'}
   end
@@ -13,8 +13,8 @@ RSpec.describe "Articles", type: :request do
     { title: nil, body: 'new body' }
   end
 
-  describe "GET :index" do
-    before(:each) do 
+  describe 'GET :index' do
+    before(:each) do
       get articles_path
     end
 
@@ -27,7 +27,7 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "GET :new" do
+  describe 'GET :new' do
     before(:each) do
       get new_article_path
     end
@@ -44,18 +44,16 @@ RSpec.describe "Articles", type: :request do
   describe "POST :create" do
     context 'with valid parameters' do
       it 'increases article count by 1' do
-        expect {
-          post articles_path, params: { article: valid_attributes } 
-        }.to change {
-          Article.count
-        }.by(1)
+        expect { post articles_path, params: { article: valid_attributes }  }
+          .to change { Article.count }
+          .by(1)
       end
 
       it 'redirects to the latest article' do
         post(articles_path, params: { article: valid_attributes })
 
-        expect(response).to redirect_to(article_path(Article.last)) 
-      end 
+        expect(response).to redirect_to(article_path(Article.last))
+      end
     end
 
     context 'with invalid parameters' do
@@ -66,22 +64,20 @@ RSpec.describe "Articles", type: :request do
       end
 
       it 'does not increase article count' do
-        expect {
-          post articles_path(article: nil_title_attributes)
-        }.to change {
-          Article.count
-        }.by(0)
+        expect { post articles_path(article: nil_title_attributes) }
+          .to change { Article.count }
+          .by(0)
       end
 
       it 'render the :new view' do
         post articles_path(article: nil_title_attributes)
 
-        expect(response).to render_template(:new) 
+        expect(response).to render_template(:new)
       end
     end
   end
 
-  describe "GET :show" do
+  describe 'GET :show' do
     context 'with valid id' do
       before(:each) do
         article = Article.create(initial_attributes)
@@ -100,22 +96,18 @@ RSpec.describe "Articles", type: :request do
 
     context 'with invalid id' do
       it 'raise ActiveRecord::RecordNotFound error' do
-        expect {
-          get article_path(1)
-        }.to raise_exception(ActiveRecord::RecordNotFound)
+        expect { get article_path(1) }.to raise_exception(ActiveRecord::RecordNotFound)
       end
     end
 
     context 'with no id' do
       it 'raise ActionController::UrlGenerationError error' do
-        expect {
-          get article_path()
-        }.to raise_exception(ActionController::UrlGenerationError)
+        expect { get article_path }.to raise_exception(ActionController::UrlGenerationError)
       end
     end
   end
 
-  describe "GET :edit" do
+  describe 'GET :edit' do
     let!(:article) { Article.create(initial_attributes) }
 
     before(:each) { get edit_article_path(article) }
@@ -130,7 +122,7 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "POST :update" do
+  describe 'POST :update' do
     context 'on update success' do
       let!(:article) { Article.create(initial_attributes) }
 
@@ -163,21 +155,19 @@ RSpec.describe "Articles", type: :request do
     end
   end
 
-  describe "POST :delete" do
+  describe 'POST :delete' do
     let!(:article) { Article.create(initial_attributes) }
 
     context 'on delete success' do
-      it 'returns with a 302 found response' do
+      it 'redirects to the articles index page' do
         delete article_path(article)
-        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(articles_path)
       end
-    
+
       it 'changes Article.count by -1' do
-        expect {
-          delete article_path(article)
-        }.to change {
-          Article.count
-        }.by(-1)
+        expect { delete article_path(article) }
+          .to change { Article.count }
+          .by(-1)
       end
     end
   end
