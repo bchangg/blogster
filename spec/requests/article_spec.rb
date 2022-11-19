@@ -43,12 +43,6 @@ RSpec.describe "Articles", type: :request do
 
   describe "POST :create" do
     context 'with valid parameters' do
-      it 'returns with a 302 found status code' do
-        post articles_path, params: { article: initial_attributes }
-
-        expect(response).to have_http_status(:found)
-      end
-
       it 'increases article count by 1' do
         expect {
           post articles_path, params: { article: valid_attributes } 
@@ -57,7 +51,7 @@ RSpec.describe "Articles", type: :request do
         }.by(1)
       end
 
-      it 'shows the latest article' do
+      it 'redirects to the latest article' do
         post(articles_path, params: { article: valid_attributes })
 
         expect(response).to redirect_to(article_path(Article.last)) 
