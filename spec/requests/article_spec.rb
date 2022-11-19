@@ -43,8 +43,6 @@ RSpec.describe "Articles", type: :request do
 
   describe "POST :create" do
     context 'with valid parameters' do
-      valid_article = { title: 'test1', body: 'test' }
-
       it 'returns with a 302 found status code' do
         post articles_path, params: { article: initial_attributes }
 
