@@ -60,21 +60,21 @@ RSpec.describe "Articles", type: :request do
 
     context 'with invalid parameters' do
       it 'returns with a 422 status code' do
-        post(articles_path, params: { article: nil_title_attributes })
+        post articles_path(article: nil_title_attributes)
 
         expect(response).to have_http_status(:unprocessable_entity)
       end
 
       it 'does not increase article count' do
         expect {
-          post(articles_path, params: { article: nil_title_attributes })
+          post articles_path(article: nil_title_attributes)
         }.to change {
           Article.count
         }.by(0)
       end
 
       it 'render the :new view' do
-        post(articles_path, params: { article: nil_title_attributes })
+        post articles_path(article: nil_title_attributes)
 
         expect(response).to render_template(:new) 
       end
