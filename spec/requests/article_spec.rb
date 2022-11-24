@@ -44,7 +44,7 @@ RSpec.describe 'Articles', type: :request do
   describe "POST :create" do
     context 'with valid parameters' do
       it 'increases article count by 1' do
-        expect { post articles_path, params: { article: valid_attributes }  }
+        expect { post articles_path, params: { article: valid_attributes } }
           .to change { Article.count }
           .by(1)
       end
