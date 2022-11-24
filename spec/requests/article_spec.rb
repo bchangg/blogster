@@ -2,15 +2,15 @@ require 'rails_helper'
 
 RSpec.describe 'Articles', type: :request do
   let(:initial_attributes) do
-    { title: 'test', body: 'test body'}
+    FactoryBot.attributes_for(:article)
   end
 
   let(:valid_attributes) do
-    { title: 'new test', body: 'new body' }
+    FactoryBot.attributes_for(:article)
   end
 
   let(:nil_title_attributes) do
-    { title: nil, body: 'new body' }
+    FactoryBot.attributes_for(:article, body: nil)
   end
 
   describe 'GET :index' do
