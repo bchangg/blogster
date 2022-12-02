@@ -1,6 +1,14 @@
 class ArticlesController < ApplicationController
+  PAGINATION_DEFAULTS = {
+    LIMIT: 10,
+    PAGE: 1
+  }
+
   def index
-    @articles = Article.all
+    limit = params[:limit].to_i || PAGINATION_DEFAULTS['LIMIT']
+    page = params[:page].to_i || PAGINATION_DEFAULTS['PAGE']
+    raise page.inspect
+    @articles = Article.all.limit(limit)
   end
 
   def create
