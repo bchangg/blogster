@@ -1,13 +1,9 @@
 class ArticlesController < ApplicationController
-  PAGINATION_DEFAULTS = {
-    LIMIT: 10,
-    PAGE: 1
-  }
-
   def index
-    limit = params[:limit].to_i || PAGINATION_DEFAULTS['LIMIT']
-    page = params[:page].to_i || PAGINATION_DEFAULTS['PAGE']
-    raise page.inspect
+    limit = params[:count].nil? ? 10 : params[:count]
+    page = params[:page].nil? ? 1 : params[:page]
+    @page_count = Article.count / limit
+
     @articles = Article.all.limit(limit)
   end
 

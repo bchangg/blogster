@@ -4,6 +4,9 @@
 
 <div class="text-right">
   <%= link_to 'First', nil, class: 'text-sky-400' %>
+  <% 1.upto @page_count do |page| %>
+  <%= link_to page %>
+  <% end %>
   <%= link_to 'Last', nil, class: 'text-sky-400' %>
 </div>
 
