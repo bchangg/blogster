@@ -129,7 +129,7 @@ RSpec.describe 'Articles', type: :request do
       before(:each) { put article_path(article, article: valid_attributes) }
 
       it 'redirects to the updated article' do
-        expect(response).to redirect_to(article_path(article))
+        expect(response).to redirect_to(article_path(article.reload))
       end
 
       it 'updates the article' do

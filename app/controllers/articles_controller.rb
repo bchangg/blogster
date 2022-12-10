@@ -40,14 +40,14 @@ class ArticlesController < ApplicationController
 
     if article.destroy
       flash[:notice] = "#{article.title} was deleted"
-      redirect_to articles_path
     else
       flash[:alert] = "Could not delete #{article.title}"
-      redirect_to articles_path
     end
+    redirect_to articles_path
   end
 
   private
+
   def article_params
     params.require(:article).permit(:title, :body)
   end
