@@ -3,11 +3,11 @@
 <br>
 
 <div class="text-right">
-  <%= link_to 'First', nil, class: 'text-sky-400' %>
+  <%= link_to 'First', path_with_params(articles_path, { page: 1 }) %>
   <% 1.upto @page_count do |page| %>
-  <%= link_to page %>
+    <%= link_to page, path_with_params(articles_path, { page: page }) %>
   <% end %>
-  <%= link_to 'Last', nil, class: 'text-sky-400' %>
+  <%= link_to 'Last', path_with_params(articles_path, { page: @page_count }) %>
 </div>
 
 <table class="text-center">
