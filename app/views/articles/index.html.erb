@@ -2,12 +2,19 @@
 
 <br>
 
+<div class="text-center">
+  <%= link_to icon('fa-solid', 'angles-left'), path_with_params(articles_path, { page: 1 }) %>
+  <%= link_to icon('fa-solid', 'chevron-left'), path_with_params(articles_path, { page: @page > 1 ? @page - 1 : @page }) %>
+  <%= link_to icon('fa-solid', 'chevron-right'), path_with_params(articles_path, { page: @page < @page_count ? @page + 1 : @page_count }) %>
+  <%= link_to icon('fa-solid', 'angles-right'), path_with_params(articles_path, { page: @page_count }) %>
+</div>
+
 <table class="text-center">
   <thead>
     <tr>
       <th>Title</th>
       <th>Body</th>
-      <th>Actions</th>
+      <th colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +22,12 @@
       <tr>
         <td><%= link_to article.title, article_path(article), class: 'text-sky-400' %></td>
         <td><%= article.body %></td>
-        <td><%= link_to "Edit", edit_article_path(article) %><%= button_to "Delete", article_path(article), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } } %></td>
+        <td>
+          <%= link_to "Edit", edit_article_path(article) %>
+        </td>
+        <td>
+          <%= button_to "Delete", article_path(article), method: 'delete', form: { data: { turbo_confirm: 'Are you sure?' } } %>
+        </td>
       </tr>
     <% end %>
   </tbody>

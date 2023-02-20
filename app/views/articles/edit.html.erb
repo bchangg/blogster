@@ -1,5 +1,1 @@
-<h1 class="text-3xl text-center font-bold">Edit Article</h1>
-
-<br>
-
-<%= render 'form', model: @article %>
+<%= render partial: 'form', locals: { model: @article, mode: 'Edit' } %>
