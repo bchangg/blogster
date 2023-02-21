@@ -1,14 +1,13 @@
 class ArticlesController < ApplicationController
   def index
-    limit = (params[:count].nil? ? 10 : params[:count]).to_i
-
-    logger.info limit
-
+    @limit = (params[:limit].nil? ? 10 : params[:limit]).to_i
     @page = (params[:page].nil? ? 1 : params[:page]).to_i
-    @page_count = Article.count / limit
-    logger.info @page
-    logger.info @page_count
-    @articles = Article.limit(limit).offset(@page * limit)
+
+    @page_count = Article.count / @limit
+    @page_count = 1 if @page_count.zero?
+
+    @articles = Article.limit(@limit)
+    @articles = @articles.offset(@page * @limit) if @page > 1
   end
 
   def create
