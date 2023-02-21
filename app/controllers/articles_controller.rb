@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   def index
     limit = (params[:count].nil? ? 10 : params[:count]).to_i
+    puts limit
 
     @page = (params[:page].nil? ? 1 : params[:page]).to_i
     @page_count = Article.count / limit
