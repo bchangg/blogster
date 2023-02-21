@@ -5,6 +5,7 @@ class HealthController < ApplicationController
     if ActiveRecord::Base.connected?
       render json: {
         success: true,
+        name: ActiveRecord::Base.connection.current_database,
         message: 'Database connected'
       }, status: :ok
     else
