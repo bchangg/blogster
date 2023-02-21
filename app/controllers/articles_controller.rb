@@ -2,8 +2,12 @@ class ArticlesController < ApplicationController
   def index
     limit = (params[:count].nil? ? 10 : params[:count]).to_i
 
+    logger.info limit
+
     @page = (params[:page].nil? ? 1 : params[:page]).to_i
     @page_count = Article.count / limit
+    logger.info @page
+    logger.info @page_count
     @articles = Article.limit(limit).offset(@page * limit)
   end
 
