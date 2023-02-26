@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   def index
-    @limit = params[:limit].to_i
+    @limit = params[:per_page].to_i
     @limit = 10 if @limit.zero?
 
     @page = params[:page].to_i
