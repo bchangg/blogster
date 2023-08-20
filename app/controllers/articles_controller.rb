@@ -6,6 +6,13 @@ class ArticlesController < ApplicationController
     @page = (params[:page].nil? ? 1 : params[:page]).to_i
     @page_count = Article.count / @limit
     @articles = Article.limit(@limit).offset(@page * @limit)
+    logger.info(
+      {
+        page: @page,
+        page_count: @page_count,
+        limit: @limit
+      }
+    )
   end
 
   def create
