@@ -8,16 +8,6 @@ class ArticlesController < ApplicationController
 
     @page_count = (Article.count / limit) + 1
     @articles = Article.limit(limit).offset(offset * limit)
-
-    logger.info(
-      {
-        params: params,
-        page: @page,
-        page_count: @page_count,
-        limit: limit,
-        offset: offset
-      }
-    )
   end
 
   def create
