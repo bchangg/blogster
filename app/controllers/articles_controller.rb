@@ -3,14 +3,9 @@ class ArticlesController < ApplicationController
     @limit = params[:per_page].to_i
     @limit = 10 if @limit.zero?
 
-    @page = params[:page].to_i
-    @page = 1 if @page.zero?
-
+    @current_page = (params[:page].nil? ? 1 : params[:page]).to_i
     @page_count = Article.count / @limit
-    @page_count = 1 if @page_count.zero?
-
-    @articles = Article.limit(@limit)
-    @articles = @articles.offset(@page * @limit) if @page > 1
+    @articles = Article.limit(@limit).offset(@current_page * @limit)
   end
 
   def create
