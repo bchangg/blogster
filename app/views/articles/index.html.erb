@@ -2,23 +2,20 @@
 
 <br>
 
-<section class="text-center">
+<div class="text-center flex flex-col">
   <div>
     <%= link_to icon('fa-solid', 'angles-left'), path_with_params(articles_path, { page: 1 }) %>
-    <%= link_to icon('fa-solid', 'chevron-left'), path_with_params(articles_path, { page: @page > 1 ? @page - 1 : @page }) %>
+    <%= link_to icon('fa-solid', 'chevron-left'), path_with_params(articles_path, { page: @current_page > 1 ? @current_page - 1 : @current_page }) %>
     <% 1.upto @page_count do |page| %>
       <%= link_to page, path_with_params(articles_path, { page: page }) %>
     <% end %>
-    <%= link_to icon('fa-solid', 'chevron-right'), path_with_params(articles_path, { page: @page < @page_count ? @page + 1 : @page_count }) %>
+    <%= link_to icon('fa-solid', 'chevron-right'), path_with_params(articles_path, { page: @current_page < @page_count ? @current_page + 1 : @page_count }) %>
     <%= link_to icon('fa-solid', 'angles-right'), path_with_params(articles_path, { page: @page_count }) %>
   </div>
   <div>
-    <%#= form_tag articles_path, method: :get do %>
-      <%#= select_tag :per_page, options_for_select([10, 20, 50, 100], params[:per_page]) %>
-    <%# end %> 
-    <p>Put the per_page selector here</p>
+    <%= select(:article, :page, 1..@page_count) %>
   </div>
-</section>
+</div>
 
 <table class="text-center">
   <thead>
