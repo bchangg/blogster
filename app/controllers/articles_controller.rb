@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
     @articles = Article.limit(@limit).offset(@page * @limit)
     logger.info(
       {
+        params: params,
         page: @page,
         page_count: @page_count,
         limit: @limit
