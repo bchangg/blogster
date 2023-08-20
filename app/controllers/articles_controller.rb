@@ -4,7 +4,7 @@ class ArticlesController < ApplicationController
     @limit = 10 if @limit.zero?
 
     @page = (params[:page].nil? ? 1 : params[:page]).to_i
-    @page_count = Article.count / @limit
+    @page_count = (Article.count / @limit) + 1
     @articles = Article.limit(@limit).offset(@page * @limit)
     logger.info(
       {
