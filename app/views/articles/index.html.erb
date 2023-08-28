@@ -13,7 +13,12 @@
     <%= link_to icon('fa-solid', 'angles-right'), path_with_params(articles_path, { page: @page_count }) %>
   </div>
   <div>
-    <%= select(:article, :page, [*PaginationHelper::ITEMS_PER_PAGE]) %>
+    <%= select(
+      :article,
+      :page,
+      [*PaginationHelper::ITEMS_PER_PAGE],
+      selected: @limit,
+    ) %>
   </div>
 </div>
 
