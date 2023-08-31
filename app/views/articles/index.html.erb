@@ -4,21 +4,22 @@
 
 <div class="text-center flex flex-col">
   <div>
-    <%= link_to icon('fa-solid', 'angles-left'), path_with_params(articles_path, { page: 1 }) %>
-    <%= link_to icon('fa-solid', 'chevron-left'), path_with_params(articles_path, { page: @page > 1 ? @page - 1 : @page }) %>
+    <%= link_to icon('fa-solid', 'angles-left'), controller: 'articles', action: 'index', page: 1, per_page: @limit %>
+    <%= link_to icon('fa-solid', 'chevron-left'), controller: 'articles', action: 'index', page: @page > 1 ? @page - 1 : @page, per_page: @limit %>
     <% 1.upto @page_count do |page| %>
-      <%= link_to page, path_with_params(articles_path, { page: page }) %>
+      <%= link_to page, controller: 'articles', action: 'index', page: page, per_page: @limit %>
     <% end %>
-    <%= link_to icon('fa-solid', 'chevron-right'), path_with_params(articles_path, { page: @page < @page_count ? @page + 1 : @page_count }) %>
-    <%= link_to icon('fa-solid', 'angles-right'), path_with_params(articles_path, { page: @page_count }) %>
+    <%= link_to icon('fa-solid', 'chevron-right'), controller: 'articles', action: 'index', page: @page < @page_count ? @page + 1 : @page_count, per_page: @limit %>
+    <%= link_to icon('fa-solid', 'angles-right'), controller: 'articles', action: 'index', page: @page_count, per_page: @limit %>
   </div>
   <div>
-    <%= select(
-      :article,
-      :page,
-      [*PaginationHelper::ITEMS_PER_PAGE],
-      selected: @limit,
-    ) %>
+    <%= form_with url: articles_path, method: 'GET' do |form| %>
+      <%= select_tag(
+        :per_page,
+        options_for_select([*PaginationHelper::ITEMS_PER_PAGE], @limit),
+        onchange: 'this.form.submit()',
+      ) %>
+    <% end %>
   </div>
 </div>
 
