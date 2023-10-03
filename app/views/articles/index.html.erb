@@ -16,7 +16,7 @@
     <%= form_with url: articles_path, method: 'GET' do |form| %>
       <%= select_tag(
         :per_page,
-        options_for_select([*PaginationHelper::ITEMS_PER_PAGE], @limit),
+        options_for_select(PaginationHelper::ITEMS_PER_PAGE, @limit),
         onchange: 'this.form.submit()',
       ) %>
     <% end %>
