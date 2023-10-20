@@ -33,6 +33,27 @@ RSpec.describe 'Articles', type: :request do
     end
   end
 
+  describe 'GET :index with per_page' do
+    it 'dynamically assigns @total_pages when per_page changes', focus: true do
+      FactoryBot.create_list(:article, 50)
+
+      get articles_path, params: { per_page: 5 }
+      expect(assigns(:total_pages)).to eq(10)
+
+      get articles_path, params: { per_page: 10 }
+      expect(assigns(:total_pages)).to eq(5)
+
+      get articles_path, params: { per_page: 25 }
+      expect(assigns(:total_pages)).to eq(2)
+
+      get articles_path, params: { per_page: 30 }
+      expect(assigns(:total_pages)).to eq(2)
+
+      get articles_path, params: { per_page: 50 }
+      expect(assigns(:total_pages)).to eq(1)
+    end
+  end
+
   describe 'GET :new' do
     before(:each) do
       get new_article_path
