@@ -26,9 +26,9 @@ RSpec.describe 'Articles', type: :request do
       expect(response).to render_template(:index)
     end
 
-    it 'assigns @page, @page_count, @articles variables' do
+    it 'assigns @page, @total_pages, @articles variables' do
       expect(assigns(:page)).to_not eq(nil)
-      expect(assigns(:page_count)).to_not eq(nil)
+      expect(assigns(:total_pages)).to_not eq(nil)
       expect(assigns(:articles)).to_not eq(nil)
     end
   end

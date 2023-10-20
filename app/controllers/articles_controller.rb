@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
 
     offset = @page - 1
 
-    @page_count = (Article.count / @limit) + 1
+    @total_pages = (Article.count / @limit) + 1
     @articles = Article.limit(@limit).offset(offset * @limit)
   end
 

@@ -6,11 +6,11 @@
   <div>
     <%= link_to icon('fa-solid', 'angles-left'), controller: 'articles', action: 'index', page: 1, per_page: @limit %>
     <%= link_to icon('fa-solid', 'chevron-left'), controller: 'articles', action: 'index', page: @page > 1 ? @page - 1 : @page, per_page: @limit %>
-    <% 1.upto @page_count do |page| %>
+    <% 1.upto @total_pages do |page| %>
       <%= link_to page, controller: 'articles', action: 'index', page: page, per_page: @limit %>
     <% end %>
-    <%= link_to icon('fa-solid', 'chevron-right'), controller: 'articles', action: 'index', page: @page < @page_count ? @page + 1 : @page_count, per_page: @limit %>
-    <%= link_to icon('fa-solid', 'angles-right'), controller: 'articles', action: 'index', page: @page_count, per_page: @limit %>
+    <%= link_to icon('fa-solid', 'chevron-right'), controller: 'articles', action: 'index', page: @page < @total_pages ? @page + 1 : @total_pages, per_page: @limit %>
+    <%= link_to icon('fa-solid', 'angles-right'), controller: 'articles', action: 'index', page: @total_pages, per_page: @limit %>
   </div>
   <div>
     <%= form_with url: articles_path, method: 'GET' do |form| %>
