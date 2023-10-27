@@ -61,6 +61,9 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'main'
   gem 'rubocop', '~> 1.57', require: false
+  gem 'rubocop-factory_bot', '~> 2.24'
+  gem 'rubocop-rails', '~> 2.22'
+  gem 'rubocop-rspec', '~> 2.25'
 end
 
 group :test do
