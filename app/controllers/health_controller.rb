@@ -14,7 +14,7 @@ class HealthController < ApplicationController
         message: 'Not connected to database'
       }, status: :not_acceptable
     end
-  rescue => e
+  rescue StandardError => e
     render json: {
       success: false,
       message: e
