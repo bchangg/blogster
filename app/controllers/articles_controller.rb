@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
   def index
     @page = (params[:page].nil? ? 1 : params[:page]).to_i
