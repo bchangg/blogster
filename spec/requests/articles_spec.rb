@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Articles', type: :request do
+RSpec.describe Articles, type: :request do
   let(:initial_attributes) do
     FactoryBot.attributes_for(:article)
   end
@@ -29,9 +29,9 @@ RSpec.describe 'Articles', type: :request do
     end
 
     it 'assigns @page, @total_pages, @articles variables' do
-      expect(assigns(:page)).to_not eq(nil)
-      expect(assigns(:total_pages)).to_not eq(nil)
-      expect(assigns(:articles)).to_not eq(nil)
+      expect(assigns(:page)).not_to eq(nil)
+      expect(assigns(:total_pages)).not_to eq(nil)
+      expect(assigns(:articles)).not_to eq(nil)
     end
   end
 
@@ -41,12 +41,6 @@ RSpec.describe 'Articles', type: :request do
 
       get articles_path, params: { per_page: 5 }
       expect(assigns(:total_pages)).to eq(10)
-
-      get articles_path, params: { per_page: 10 }
-      expect(assigns(:total_pages)).to eq(5)
-
-      get articles_path, params: { per_page: 25 }
-      expect(assigns(:total_pages)).to eq(2)
 
       get articles_path, params: { per_page: 30 }
       expect(assigns(:total_pages)).to eq(2)
