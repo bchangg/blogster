@@ -43,8 +43,8 @@ RSpec.describe 'Articles' do
         it 'dynamically assigns @total_pages' do
           create_list(:article, 50)
 
-          get articles_path, params: { per_page: params.per_page }
-          expect(assigns(:total_pages)).to eq(params.expected)
+          get articles_path, params: { per_page: params[:per_page] }
+          expect(assigns(:total_pages)).to eq(params[:expected])
         end
       end
     end
@@ -188,7 +188,7 @@ RSpec.describe 'Articles' do
 
       it 'changes Article.count by -1' do
         expect { delete article_path(article) }
-          .to change(Article.count)
+          .to change(Article, :count)
           .by(-1)
       end
     end
