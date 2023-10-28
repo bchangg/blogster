@@ -2,17 +2,17 @@
 
 require 'rails_helper'
 
-RSpec.describe Articles, type: :request do
+RSpec.describe 'Articles' do
   let(:initial_attributes) do
-    FactoryBot.attributes_for(:article)
+    attributes_for(:article)
   end
 
   let(:valid_attributes) do
-    FactoryBot.attributes_for(:article)
+    attributes_for(:article)
   end
 
   let(:nil_title_attributes) do
-    FactoryBot.attributes_for(:article, body: nil)
+    attributes_for(:article, body: nil)
   end
 
   describe 'GET :index' do
@@ -29,24 +29,24 @@ RSpec.describe Articles, type: :request do
     end
 
     it 'assigns @page, @total_pages, @articles variables' do
-      expect(assigns(:page)).not_to eq(nil)
-      expect(assigns(:total_pages)).not_to eq(nil)
-      expect(assigns(:articles)).not_to eq(nil)
+      expect(assigns(:page)).not_to be_nil
+      expect(assigns(:total_pages)).not_to be_nil
+      expect(assigns(:articles)).not_to be_nil
     end
-  end
 
-  describe 'GET :index with per_page' do
-    it 'dynamically assigns @total_pages when per_page changes', focus: true do
-      FactoryBot.create_list(:article, 50)
+    context 'when given differing per_page query params' do
+      [
+        { per_page: 5, expected: 10 },
+        { per_page: 30, expected: 2 },
+        { per_page: 50, expected: 1 }
+      ].each do |params|
+        it 'dynamically assigns @total_pages' do
+          create_list(:article, 50)
 
-      get articles_path, params: { per_page: 5 }
-      expect(assigns(:total_pages)).to eq(10)
-
-      get articles_path, params: { per_page: 30 }
-      expect(assigns(:total_pages)).to eq(2)
-
-      get articles_path, params: { per_page: 50 }
-      expect(assigns(:total_pages)).to eq(1)
+          get articles_path, params: { per_page: params.per_page }
+          expect(assigns(:total_pages)).to eq(params.expected)
+        end
+      end
     end
   end
 
@@ -68,7 +68,7 @@ RSpec.describe Articles, type: :request do
     context 'with valid parameters' do
       it 'increases article count by 1' do
         expect { post articles_path, params: { article: valid_attributes } }
-          .to change { Article.count }
+          .to change(Article, :count)
           .by(1)
       end
 
@@ -88,8 +88,7 @@ RSpec.describe Articles, type: :request do
 
       it 'does not increase article count' do
         expect { post articles_path(article: nil_title_attributes) }
-          .to change { Article.count }
-          .by(0)
+          .not_to change(Article, :count)
       end
 
       it 'render the :new view' do
@@ -146,7 +145,7 @@ RSpec.describe Articles, type: :request do
   end
 
   describe 'POST :update' do
-    context 'on update success' do
+    context 'when update succeeds' do
       let!(:article) { Article.create(initial_attributes) }
 
       before(:each) { put article_path(article, article: valid_attributes) }
@@ -161,7 +160,7 @@ RSpec.describe Articles, type: :request do
       end
     end
 
-    context 'on update failure' do
+    context 'when update fails' do
       let!(:article) { Article.create(initial_attributes) }
 
       it 'returns with a 422 unprocessable entity error' do
@@ -181,7 +180,7 @@ RSpec.describe Articles, type: :request do
   describe 'POST :delete' do
     let!(:article) { Article.create(initial_attributes) }
 
-    context 'on delete success' do
+    context 'when delete succeeds' do
       it 'redirects to the articles index page' do
         delete article_path(article)
         expect(response).to redirect_to(articles_path)
@@ -189,7 +188,7 @@ RSpec.describe Articles, type: :request do
 
       it 'changes Article.count by -1' do
         expect { delete article_path(article) }
-          .to change { Article.count }
+          .to change(Article.count)
           .by(-1)
       end
     end
