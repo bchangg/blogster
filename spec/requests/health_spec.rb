@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Health', type: :request do
+RSpec.describe 'Health' do
   describe 'GET :database' do
     it 'returns with 200 success status code' do
       get health_path
