@@ -15,14 +15,8 @@ class ArticlesController < ApplicationController
     @articles = Article.limit(@limit).offset(offset * @limit)
   end
 
-  def create
-    @article = Article.new(article_params)
-
-    if @article.save
-      redirect_to @article
-    else
-      render :new, status: :unprocessable_entity
-    end
+  def show
+    @article = Article.find(params[:id])
   end
 
   def new
@@ -33,8 +27,14 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
-  def show
-    @article = Article.find(params[:id])
+  def create
+    @article = Article.new(article_params)
+
+    if @article.save
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
