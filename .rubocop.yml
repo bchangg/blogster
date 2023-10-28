@@ -2,3 +2,21 @@ require:
   - rubocop-factory_bot
   - rubocop-rails
   - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.1.2
+  NewCops: enable
+  Exclude:
+    - "db/**/**"
+    - "config/**/**"
+    - "bin/**"
+    - "spec/{rails_helper.rb, spec_helper.rb}"
+
+RSpec/HookArgument:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 3
+
+Style/Documentation:
+  Enabled: false
