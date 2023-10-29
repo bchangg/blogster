@@ -20,3 +20,7 @@ RSpec/MultipleExpectations:
 
 Style/Documentation:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  SafeAutoCorrect: true
