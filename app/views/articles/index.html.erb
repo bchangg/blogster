@@ -2,26 +2,7 @@
 
 <br>
 
-<div class="text-center flex flex-col">
-  <div>
-    <%= link_to icon('fa-solid', 'angles-left'), root_path({ page: 1, per_page: @limit }) %>
-    <%= link_to icon('fa-solid', 'chevron-left'), root_path({ page: @page > 1 ? @page - 1 : @page, per_page: @limit }) %>
-    <% 1.upto @total_pages do |page| %>
-      <%= link_to page, root_path({ page: page, per_page: @limit }) %>
-    <% end %>
-    <%= link_to icon('fa-solid', 'chevron-right'), root_path({ page: @page < @total_pages ? @page + 1 : @total_pages, per_page: @limit }) %>
-    <%= link_to icon('fa-solid', 'angles-right'), root_path({ page: @total_pages, per_page: @limit }) %>
-  </div>
-  <div>
-    <%= form_with url: root_path, method: 'GET' do |form| %>
-      <%= select_tag(
-        :per_page,
-        options_for_select(PaginationHelper::ITEMS_PER_PAGE, @limit),
-        onchange: 'this.form.submit()',
-      ) %>
-    <% end %>
-  </div>
-</div>
+<%= render 'shared/pagination', locals: { pagination: @pagination } %>
 
 <table class="text-center">
   <thead>

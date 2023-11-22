@@ -50,7 +50,7 @@ gem 'bootsnap', require: false
 # gem "image_processing", "~> 1.2"
 
 # Tailwind
-gem 'tailwindcss-rails', '~> 2.0'
+gem 'tailwindcss-rails', '~> 2.0', '>= 2.0.32'
 
 # Font awesome
 gem 'font-awesome-sass', '~> 6.2.1'

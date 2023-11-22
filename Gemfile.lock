@@ -263,7 +263,7 @@ GEM
       sprockets (>= 3.0.0)
     stimulus-rails (1.2.1)
       railties (>= 6.0.0)
-    tailwindcss-rails (2.0.23)
+    tailwindcss-rails (2.0.32)
       railties (>= 6.0.0)
     thor (1.2.1)
     timeout (0.3.2)
@@ -312,7 +312,7 @@ DEPENDENCIES
   simplecov
   sprockets-rails
   stimulus-rails
-  tailwindcss-rails (~> 2.0)
+  tailwindcss-rails (~> 2.0, >= 2.0.32)
   turbo-rails
   web-console
 

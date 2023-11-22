@@ -2,17 +2,19 @@
 
 class ArticlesController < ApplicationController
   def index
-    @page = (params[:page].nil? ? 1 : params[:page]).to_i
+    @pagination, @articles = Pagination.paginate(collection: Article.all, params: page_params)
 
-    @limit = params[:per_page].to_i
-    @limit = 10 if @limit.zero?
+    # @page = (params[:page].nil? ? 1 : params[:page]).to_i
 
-    offset = @page - 1
+    # @limit = params[:per_page].to_i
+    # @limit = 10 if @limit.zero?
 
-    pages = Article.count / @limit
+    # offset = @page - 1
 
-    @total_pages = (Article.count % @limit).zero? ? pages : pages + 1
-    @articles = Article.limit(@limit).offset(offset * @limit)
+    # pages = Article.count / @limit
+
+    # @total_pages = (Article.count % @limit).zero? ? pages : pages + 1
+    # @articles = Article.limit(@limit).offset(offset * @limit)
   end
 
   def show
@@ -62,5 +64,10 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body)
+  end
+
+  def page_params
+    puts 'LOOK AT ME:', params
+    params.permit(:page, :per_page)
   end
 end
