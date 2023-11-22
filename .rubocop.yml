@@ -12,6 +12,12 @@ AllCops:
     - "bin/**"
     - "spec/{rails_helper.rb, spec_helper.rb}"
 
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Lint/Void:
+  Enabled: false
+
 RSpec/HookArgument:
   Enabled: false
 
