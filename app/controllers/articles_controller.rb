@@ -2,19 +2,7 @@
 
 class ArticlesController < ApplicationController
   def index
-    @pagination, @articles = Pagination.paginate(collection: Article.all, params: page_params)
-
-    # @page = (params[:page].nil? ? 1 : params[:page]).to_i
-
-    # @limit = params[:per_page].to_i
-    # @limit = 10 if @limit.zero?
-
-    # offset = @page - 1
-
-    # pages = Article.count / @limit
-
-    # @total_pages = (Article.count % @limit).zero? ? pages : pages + 1
-    # @articles = Article.limit(@limit).offset(offset * @limit)
+    @pagination, @articles = Pagination.paginate(collection: Article, params: page_params)
   end
 
   def show
@@ -67,7 +55,6 @@ class ArticlesController < ApplicationController
   end
 
   def page_params
-    puts 'LOOK AT ME:', params
     params.permit(:page, :per_page)
   end
 end
