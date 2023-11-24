@@ -112,6 +112,7 @@ GEM
       sassc (~> 2.0)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    htmlbeautifier (1.4.2)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.1.5)
@@ -297,6 +298,7 @@ DEPENDENCIES
   factory_bot_rails
   faker!
   font-awesome-sass (~> 6.2.1)
+  htmlbeautifier
   importmap-rails
   jbuilder
   pg (~> 1.1)
