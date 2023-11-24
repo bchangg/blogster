@@ -177,18 +177,37 @@ RSpec.describe 'Articles' do
   end
 
   describe 'POST :delete' do
+    subject(:delete_request) { delete article_path(article) }
+
     let!(:article) { Article.create(initial_attributes) }
 
     context 'when delete succeeds' do
       it 'redirects to the articles index page' do
-        delete article_path(article)
+        delete_request
         expect(response).to redirect_to(articles_path)
       end
 
       it 'changes Article.count by -1' do
-        expect { delete article_path(article) }
-          .to change(Article, :count)
-          .by(-1)
+        expect { delete_request }.to change(Article, :count).by(-1)
+      end
+
+      it 'flashes a success message' do
+        delete_request
+
+        expect(flash[:notice]).not_to be_nil
+      end
+    end
+
+    context 'when delete fails' do
+      before do
+        allow(Article).to receive(:find).and_return(article)
+        allow(article).to receive(:destroy).and_return(false)
+      end
+
+      it 'flashes a failure message' do
+        delete_request
+
+        expect(flash[:alert]).not_to be_nil
       end
     end
   end
