@@ -33,17 +33,54 @@ RSpec.describe 'Articles' do
       expect(assigns(:articles)).to be_a ActiveRecord::Relation
     end
 
-    context 'when given differing per_page query params' do
+    context 'when given different query params' do
+      before do
+        create_list(:article, 50)
+      end
+
       [
         { per_page: 5, expected: 10 },
         { per_page: 30, expected: 2 },
         { per_page: 50, expected: 1 }
       ].each do |params|
         it 'dynamically assigns @pagination.total_pages' do
-          create_list(:article, 50)
-
           get articles_path, params: { per_page: params[:per_page] }
           expect(assigns(:pagination).total_pages).to eq(params[:expected])
+        end
+      end
+
+      [
+        { page: 1, per_page: 5, expected: 0 },
+        { page: 2, per_page: 5,  expected: 5 },
+        { page: 3, per_page: 10, expected: 20 }
+      ].each do |params|
+        it 'dynamically assigns @pagination.offset' do
+          get articles_path, params: {
+            page: params[:page],
+            per_page: params[:per_page]
+          }
+          expect(assigns(:pagination).offset).to eq(params[:expected])
+        end
+      end
+
+      [
+        { page: 1, expected: nil },
+        { page: 2, expected: 1 }
+      ].each do |params|
+        it 'dynamically assigns @pagination.previous_page' do
+          get articles_path, params: { page: params[:page] }
+          expect(assigns(:pagination).previous_page).to eq(params[:expected])
+        end
+      end
+
+      [
+        { page: 1, expected: true },
+        { page: 2, expected: false },
+        { page: 3, expected: false }
+      ].each do |params|
+        it 'dynamically assigns @pagination.first_page?' do
+          get articles_path, params: { page: params[:page] }
+          expect(assigns(:pagination).first_page?).to eq(params[:expected])
         end
       end
     end
