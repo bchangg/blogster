@@ -1,17 +1,20 @@
-<% require_relative '../../view_models/pagination' %>
-
 <div class="mx-96">
   <div class="flex items-center justify-between">
     <% if @pagination.previous_page? %>
       <%= link_to "First", root_path({ page: 1, per_page: @pagination.per_page }) %>
 
-      <%= link_to icon("fa-solid", "chevron-left"), root_path({ page: @pagination.previous_page }) %>
+      <%= link_to icon("fa-solid", "chevron-left"), root_path({ page: @pagination.previous_page, per_page: @pagination.per_page }) %>
     <% else %>
       <p class="text-neutral-400">First</p>
       <%= icon("fa-solid", "chevron-left", class: "text-neutral-400") %>
     <% end %>
 
-    <p><%= "Page #{@pagination.page} of #{@pagination.total_pages}" %></p>
+    <% 1.upto @pagination.total_pages do |page| %>
+      <%= link_to page,
+        root_path({ page: page, per_page: @pagination.per_page }),
+        style: page == @pagination.page ? 'font-weight: bold' : ''
+      %>
+    <% end %>
 
     <% if @pagination.next_page? %>
       <%= link_to icon("fa-solid", "chevron-right"), root_path({ page: @pagination.next_page, per_page: @pagination.per_page }) %>
@@ -25,12 +28,8 @@
   <%= form_with url: root_path, method: "GET", class: "flex justify-center" do |form| %>
     <%= select_tag(
       :per_page,
-      options_for_select(ViewModels::Pagination::PER_PAGE, @pagination.per_page),
+      options_for_select(PaginationViewModel::PER_PAGE, @pagination.per_page),
       onchange: 'this.form.submit()',
     ) %>
   <% end %>
 </div>
-
-  <%# 1.upto @total_pages do |page| %>
-    <%# link_to page, root_path({ page: page, per_page: @limit }), style: page == @page ? 'font-weight: bold' : '' %>
-  <%# end %>
