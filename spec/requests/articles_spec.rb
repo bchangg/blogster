@@ -28,10 +28,9 @@ RSpec.describe 'Articles' do
       expect(response).to render_template(:index)
     end
 
-    it 'assigns @page, @total_pages, @articles variables' do
-      expect(assigns(:page)).not_to be_nil
-      expect(assigns(:total_pages)).not_to be_nil
-      expect(assigns(:articles)).not_to be_nil
+    it 'assigns @pagination, @articles' do
+      expect(assigns(:pagination)).to be_a PaginationViewModel
+      expect(assigns(:articles)).to be_a ActiveRecord::Relation
     end
 
     context 'when given differing per_page query params' do
@@ -40,11 +39,11 @@ RSpec.describe 'Articles' do
         { per_page: 30, expected: 2 },
         { per_page: 50, expected: 1 }
       ].each do |params|
-        it 'dynamically assigns @total_pages' do
+        it 'dynamically assigns @pagination.total_pages' do
           create_list(:article, 50)
 
           get articles_path, params: { per_page: params[:per_page] }
-          expect(assigns(:total_pages)).to eq(params[:expected])
+          expect(assigns(:pagination).total_pages).to eq(params[:expected])
         end
       end
     end
