@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :articles
 
   get 'health', to: 'health#database'
-  get '*path', to: 'home#index'
+
+  get '*path', to: 'react#index'
 end
