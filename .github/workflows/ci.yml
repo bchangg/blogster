@@ -74,6 +74,9 @@ jobs:
         with:
           node-version: 18.19.0
 
+      - name: Install Javascript Packages
+        run: yarn install
+
       - name: Run Jest
         run: yarn test
 
