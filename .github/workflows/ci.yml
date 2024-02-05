@@ -34,7 +34,7 @@ jobs:
       - name: Set Up Node
         uses: actions/setup-node@v1
         with:
-          node-version: 18.19.0
+          node-version: 14.18.2
 
       - name: Set Up Test Database
         # https://www.postgresql.org/docs/9.3/libpq-envars.html
