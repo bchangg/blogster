@@ -34,7 +34,7 @@ jobs:
       - name: Set Up Node
         uses: actions/setup-node@v1
         with:
-          node-version: 14.18.2
+          node-version: 18.19.0
 
       - name: Set Up Test Database
         # https://www.postgresql.org/docs/9.3/libpq-envars.html
@@ -57,6 +57,25 @@ jobs:
           PGPASSWORD: postgres
           PGHOST: localhost
         run: bundle exec rspec spec
+
+      - name: Upload Codecov Results
+        uses: codecov/codecov-action@v2.1.0
+
+  jest:
+    name: RSpec Tests
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+
+      - name: Set Up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18.19.0
+
+      - name: Run Jest
+        run: yarn test
 
       - name: Upload Codecov Results
         uses: codecov/codecov-action@v2.1.0
